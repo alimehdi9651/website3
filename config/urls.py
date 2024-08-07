@@ -23,7 +23,8 @@ from main.views import *
 urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path('admin/', admin.site.urls),
-    path("", index, name = "index" )
+    path("", index, name = "index" ),
+    path("Recipes/add", add_recipes, name = "add_recipes")
 ]
 
 
