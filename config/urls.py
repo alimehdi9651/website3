@@ -27,6 +27,7 @@ urlpatterns = [
     path("Recipes/add", add_recipes, name = "add_recipes"),
     path("Recipes/view", view_recipes, name = "view_recipes"),
     path("Recipes/delete<int:id>/", delete_recipes, name = "delete_recipes"),
+    path("Recipes/edit<int:id>/", edit_recipes, name = "edit_recipes"),
 ]
 
 

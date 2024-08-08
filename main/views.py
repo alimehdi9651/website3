@@ -30,3 +30,15 @@ def delete_recipes(request, id):
     reci = recipe.objects.get(id=id)
     reci.delete()
     return redirect('view_recipes')
+
+def edit_recipes(request, id):
+    reci = recipe.objects.get(id=id)
+    form = recipe_form(instance=reci)
+    if request.method == 'POST':
+        form = recipe_form(request.POST, request.FILES, instance=reci)
+        if form.is_valid():
+            form.save()
+            return redirect('view_recipes')
+    return render(request,'Recipe/edit_recipies.html', {
+        'form': form
+    } )
