@@ -24,7 +24,9 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path('admin/', admin.site.urls),
     path("", index, name = "index" ),
-    path("Recipes/add", add_recipes, name = "add_recipes")
+    path("Recipes/add", add_recipes, name = "add_recipes"),
+    path("Recipes/view", view_recipes, name = "view_recipes"),
+    path("Recipes/delete<int:id>/", delete_recipes, name = "delete_recipes"),
 ]
 
 
