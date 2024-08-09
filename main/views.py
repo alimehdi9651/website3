@@ -8,6 +8,13 @@ from .models import recipe
 def index(request):
     return render(request, 'index.html')
 
+def register_page(request):
+    return render(request, 'register.html')
+
+
+def login_page(request):
+    return render(request, 'login.html')
+
 def add_recipes(request):
     form = recipe_form()
     if request.method == 'POST':
