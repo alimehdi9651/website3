@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import recipe_form
 from .models import recipe
-
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import authenticate , login, logout
 # Create your views here.
 
 
@@ -9,11 +11,49 @@ def index(request):
     return render(request, 'index.html')
 
 def register_page(request):
+    if request.method == "POST":
+        first_name = request.POST.get('first_name')
+        # last_name = request.POST.get('last_name')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists")
+            return redirect('register_page')
+        
+        user = User(
+            first_name = first_name,
+            # last_name = last_name,
+            username = username,
+        )
+        user.set_password(password)  
+        user.save()
+        messages.info(request,"Account created sucessfully")
+        return redirect('register_page')
     return render(request, 'register.html')
 
 
 def login_page(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        
+        if not User.objects.filter(username = username).exists():
+            messages.error(request, "Invalid username")
+            return redirect('login_page')
+        
+        user = authenticate(username = username, password = password)
+        if user :
+            login(request, user)
+            return redirect('index')
+        else:
+            messages.error(request, "Incorrect Password")
+            return redirect('login_page')
+           
     return render(request, 'login.html')
+
+
 
 def add_recipes(request):
     form = recipe_form()
