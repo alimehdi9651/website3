@@ -1,0 +1,3 @@
+1.) queryset = Model_name.objects.filter(field_name"__startswith" = "any_letter"): it returns data of the field that starts with the entered letter
+2.) __endswith = "": same as starts with
+3.) __icontains = ""

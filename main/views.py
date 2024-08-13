@@ -11,6 +11,7 @@ def index(request):
     return render(request, 'index.html')
 
 def register_page(request):
+    
     if request.method == "POST":
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
