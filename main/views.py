@@ -13,17 +13,17 @@ def index(request):
 def register_page(request):
     if request.method == "POST":
         first_name = request.POST.get('first_name')
-        # last_name = request.POST.get('last_name')
+        last_name = request.POST.get('last_name')
         username = request.POST.get('username')
         password = request.POST.get('password')
-
+        print(f"{first_name=}, {last_name=},{username=}")
         if User.objects.filter(username=username).exists():
             messages.error(request, "Username already exists")
             return redirect('register_page')
         
         user = User(
             first_name = first_name,
-            # last_name = last_name,
+            last_name = last_name,
             username = username,
         )
         user.set_password(password)  
@@ -37,13 +37,11 @@ def login_page(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
-
-        
+        print(username, password)
         if not User.objects.filter(username = username).exists():
             messages.error(request, "Invalid username")
             return redirect('login_page')
-        
-        user = authenticate(username = username, password = password)
+        user = authenticate(request, username = username, password = password)
         if user :
             login(request, user)
             return redirect('index')
