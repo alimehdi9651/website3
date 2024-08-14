@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import recipe_form
-from .models import recipe
+from .models import *
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate , login, logout
@@ -88,3 +88,10 @@ def edit_recipes(request, id):
     return render(request,'Recipe/edit_recipies.html', {
         'form': form
     } )
+
+
+def get_students(request):
+    queryset = Student.objects.all()
+    return render(request, 'report/student.html',{
+        'queryset': queryset
+    })

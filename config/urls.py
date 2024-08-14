@@ -29,7 +29,8 @@ urlpatterns = [
     path("Recipes/delete<int:id>/", delete_recipes, name = "delete_recipes"),
     path("Recipes/edit<int:id>/", edit_recipes, name = "edit_recipes"),
     path("login", login_page, name = "login_page"),
-    path("register", register_page, name = "register_page")
+    path("register", register_page, name = "register_page"),
+    path("student", get_students, name = "student")
 ]
 
 

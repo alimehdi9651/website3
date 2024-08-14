@@ -27,13 +27,16 @@ class Student_ID(models.Model):
 
     def __str__(self) -> str:
         return self.student_id
-    
+
+
 class Subject(models.Model):
     subject_name = models.CharField(max_length = 100)
 
     def __str__(self) -> str:
         return self.subject_name
-    
+
+
+
 class Student(models.Model):
     department = models.ForeignKey(Department, related_name = "depart", on_delete = models.CASCADE)
     student_id = models.OneToOneField(Student_ID, related_name = "stu_id", on_delete = models.CASCADE)
@@ -45,7 +48,6 @@ class Student(models.Model):
     def __str__(self) -> str:
         return self.student_name
     
-
     class Meta():
         ordering = ['student_name']
         verbose_name = "student"
