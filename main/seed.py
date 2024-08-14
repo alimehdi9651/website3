@@ -6,8 +6,8 @@ from .models import *
 
 def create_student_marks(n=100):
     try:
-        students = Student.objects.all()
-        for student in students:
+        student_objs = Student.objects.all()
+        for student in student_objs:
             subjects = Subject.objects.all()
             for subject in subjects:
                 Subject_mark.objects.create(

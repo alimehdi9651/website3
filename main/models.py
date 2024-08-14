@@ -30,6 +30,9 @@ class Student_ID(models.Model):
     
 class Subject(models.Model):
     subject_name = models.CharField(max_length = 100)
+
+    def __str__(self) -> str:
+        return self.subject_name
     
 class Student(models.Model):
     department = models.ForeignKey(Department, related_name = "depart", on_delete = models.CASCADE)
@@ -56,6 +59,7 @@ class Subject_mark(models.Model):
         return f'{self.student.student_name} {self.subject.subject_name}'    
     
     class Meta:
+        ordering = ['student']
         unique_together = ['student','subject']
 
     
