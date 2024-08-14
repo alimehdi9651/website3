@@ -30,7 +30,8 @@ urlpatterns = [
     path("Recipes/edit<int:id>/", edit_recipes, name = "edit_recipes"),
     path("login", login_page, name = "login_page"),
     path("register", register_page, name = "register_page"),
-    path("student", get_students, name = "student")
+    path("student", get_students, name = "student"),
+    path("see_marks/<student_id>", see_marks, name = "see_marks")
 ]
 
 
