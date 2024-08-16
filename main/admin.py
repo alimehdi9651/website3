@@ -13,3 +13,11 @@ class SubjectMarkadmin(admin.ModelAdmin):
 
 
 admin.site.register(Subject_mark, SubjectMarkadmin)
+
+
+class Report_card_admin(admin.ModelAdmin):
+    list_display = ['student', 'student_rank', 'date_of_generation']
+
+
+admin.site.register(Report_card, Report_card_admin)
+

@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate , login, logout
 from django.core.paginator import Paginator
 from django.db.models import Q,Sum
+from .seed import generate_report_card
 # Create your views here.
 
 
@@ -113,6 +114,8 @@ def get_students(request):
     })
 
 def see_marks(request,student_id):
+   
+
     queryset = Subject_mark.objects.filter(student__student_id__student_id = student_id)
     total_marks = queryset.aggregate(total_marks = Sum('marks'))
     return render(request, 'report/see_marks.html', {

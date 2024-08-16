@@ -2,6 +2,7 @@ from faker import Faker
 fake = Faker()
 import random 
 from .models import *
+from django.db.models import Sum
 
 
 def create_student_marks(n=100):
@@ -48,3 +49,14 @@ def seed_db(n=10):
 
 
 
+def generate_report_card():
+    current_rank = -1
+    ranks = Subject_mark.objects.annotate(marks = Sum('std_marks__marks')).order_by('-marks', '-student_age')
+
+    i = 1
+    for rank in ranks:
+        Report_card.objects.create(
+            student = rank,
+            student_rank = i
+        )
+        i = i+1
