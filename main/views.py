@@ -114,11 +114,12 @@ def get_students(request):
     })
 
 def see_marks(request,student_id):
-   
-
+    ranks = Report_card.objects.all()
     queryset = Subject_mark.objects.filter(student__student_id__student_id = student_id)
     total_marks = queryset.aggregate(total_marks = Sum('marks'))
     return render(request, 'report/see_marks.html', {
         'queryset' : queryset,
-        'total_marks':total_marks
+        'total_marks':total_marks,
+        'ranks':ranks
     })
+

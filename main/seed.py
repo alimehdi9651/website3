@@ -38,7 +38,7 @@ def seed_db(n=10):
                  department = department,
                  student_age = student_age,
                  student_email=student_email,
-                  student_id = student_id_obj,
+                 student_id = student_id_obj,
                  student_name = student_name,
                  student_address = student_address,
                  )
@@ -50,13 +50,12 @@ def seed_db(n=10):
 
 
 def generate_report_card():
-    current_rank = -1
-    ranks = Subject_mark.objects.annotate(marks = Sum('std_marks__marks')).order_by('-marks', '-student_age')
-
+    ranks = Subject_mark.objects.annotate(total_marks = Sum('marks')).order_by('-marks')
+    print(f"{ranks=}")
     i = 1
     for rank in ranks:
         Report_card.objects.create(
-            student = rank,
+            student = rank.student,
             student_rank = i
         )
         i = i+1
